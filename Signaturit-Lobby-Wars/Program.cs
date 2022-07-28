@@ -1,3 +1,5 @@
+using Signaturit_Lobby_Wars.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +8,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Dependency injection
+builder.Services.AddSingleton<ILawsuits, Lawsuits>();
 
 var app = builder.Build();
 
