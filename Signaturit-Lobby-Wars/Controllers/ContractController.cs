@@ -9,12 +9,12 @@ namespace Signaturit_Lobby_Wars.Controllers
     [Route("[controller]")]
     public class ContractController : Controller
     {
-        private readonly ILawsuits _ilawsuits;
+        private readonly ILawsuits _lawsuits;
         private const string _EMPTY_SIGNATURE = "#";
 
         public ContractController(ILawsuits ilawsuits)
         {
-            this._ilawsuits = ilawsuits;
+            this._lawsuits = ilawsuits;
         }
 
         [HttpPost("/GetContractWinner")]
@@ -25,7 +25,23 @@ namespace Signaturit_Lobby_Wars.Controllers
                 Contract contractA = BuildContract(contractsDTO.ContractA);
                 Contract contractB = BuildContract(contractsDTO.ContractB);
 
-                return Ok(_ilawsuits.GetWinner(contractA, contractB));
+                return Ok(_lawsuits.GetWinner(contractA, contractB));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("/GetMinimunSignatureToWin")]
+        public IActionResult GetMinimunSignatureToWin([FromBody] ContractDTO contractsDTO)
+        {
+            try
+            {
+                Contract contractA = BuildContract(contractsDTO.ContractA);
+                Contract contractB = BuildContract(contractsDTO.ContractB);
+
+                return Ok(_lawsuits.GetMinimunSignatureToWin(contractA, contractB));
             }
             catch (Exception ex)
             {
