@@ -5,6 +5,11 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Signaturit-Lobby-Wars", "Signaturit-Lobby-Wars\Signaturit-Lobby-Wars.csproj", "{8BA45BEA-6E3A-4288-AEEE-80F6177BFBE2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{7E1122EC-AB82-41EE-9D64-356E88812E9D}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.txt.txt = Readme.txt.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
