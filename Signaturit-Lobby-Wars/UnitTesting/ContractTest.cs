@@ -136,7 +136,7 @@ namespace Signaturit_Lobby_Wars.UnitTesting
             Action act = () => winner.GetMinimunSignatureToWin(contractA, contractB);
             Exception exception = Assert.Throws<Exception>(act);
 
-            Assert.Equal("GetMinimunSignatureToWin -> Error while looking for the minimun signature to win - No one of the available signatures it's availabe to win the trial", exception.Message);
+            Assert.Equal("GetMinimunSignatureToWin -> Error while looking for the minimun signature to win - There are no available signatures to win the lawsuit", exception.Message);
         }
     }
 }

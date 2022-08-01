@@ -99,7 +99,7 @@ namespace Signaturit_Lobby_Wars.Services
 
                     if (signatureToWin == SignatureRole.NONE)
                     {
-                        throw new Exception($"No one of the available signatures it's availabe to win the trial");
+                        throw new Exception($"There are no available signatures to win the lawsuit");
                     }
 
                     return signatureToWin;
