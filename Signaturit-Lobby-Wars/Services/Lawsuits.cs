@@ -1,4 +1,5 @@
-﻿using Signaturit_Lobby_Wars.Models.Classes;
+﻿using Signaturit_Lobby_Wars.Helpers;
+using Signaturit_Lobby_Wars.Models.Classes;
 using static Signaturit_Lobby_Wars.Helpers.Utils;
 
 namespace Signaturit_Lobby_Wars.Services
@@ -21,7 +22,7 @@ namespace Signaturit_Lobby_Wars.Services
 
                 if (contractA.SignaturesPoints == contractB.SignaturesPoints)
                 {
-                    throw new Exception($"There is no contract winner. Signatures points of both contract are equals");
+                    throw new Exception(Utils.ExceptionMessages.SAME_POINTS);
                 }
 
                 return contractA.SignaturesPoints > contractB.SignaturesPoints ? contractA : contractB;
@@ -78,7 +79,7 @@ namespace Signaturit_Lobby_Wars.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"FilterKingSignatures -> Error while filtering signatures by King and Validator - {ex.Message}");
+                throw new Exception($"FilterKingSignatures -> {Utils.ExceptionMessages.FILTERING_ERROR} {ex.Message}");
             }
         }
 
@@ -99,14 +100,14 @@ namespace Signaturit_Lobby_Wars.Services
 
                     if (signatureToWin == SignatureRole.NONE)
                     {
-                        throw new Exception($"There are no available signatures to win the lawsuit");
+                        throw new Exception(Utils.ExceptionMessages.NO_WINNER_SIGNATURE);
                     }
 
                     return signatureToWin;
                 }
                 else
                 {
-                    throw new Exception($"There is a contract with more than one empty signature");
+                    throw new Exception(Utils.ExceptionMessages.EMPTIES_SIGNATURES);
                 }
             }
             catch (Exception ex)
@@ -155,7 +156,7 @@ namespace Signaturit_Lobby_Wars.Services
 
                 if (contractA.SignaturesPoints == contractB.SignaturesPoints)
                 {
-                    throw new Exception($"Error, both contracts have the same signatures points");
+                    throw new Exception(Utils.ExceptionMessages.SAME_SIGNATURES);
                 }
 
                 int lowerSignaturePoints = Math.Min(contractA.SignaturesPoints, contractB.SignaturesPoints);

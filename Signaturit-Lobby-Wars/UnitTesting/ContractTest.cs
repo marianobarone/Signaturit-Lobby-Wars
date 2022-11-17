@@ -1,4 +1,5 @@
-﻿using Signaturit_Lobby_Wars.Models.Classes;
+﻿using Signaturit_Lobby_Wars.Helpers;
+using Signaturit_Lobby_Wars.Models.Classes;
 using Signaturit_Lobby_Wars.Services;
 using Xunit;
 using static Signaturit_Lobby_Wars.Helpers.Utils;
@@ -18,7 +19,7 @@ namespace Signaturit_Lobby_Wars.UnitTesting
             {
                 Signatures = { SignatureRole.N, SignatureRole.N, SignatureRole.V }
             };
-            Lawsuits lawsuit = new Lawsuits();
+            ILawsuits lawsuit = new Lawsuits();
             Contract result = lawsuit.GetWinner(contractA, contractB);
 
             Assert.Equal(result, contractA);
@@ -35,7 +36,7 @@ namespace Signaturit_Lobby_Wars.UnitTesting
             {
                 Signatures = { SignatureRole.N, SignatureRole.K, SignatureRole.N }
             };
-            Lawsuits lawsuit = new Lawsuits();
+            ILawsuits lawsuit = new Lawsuits();
             Contract result = lawsuit.GetWinner(contractA, contractB);
 
             Assert.Equal(result, contractB);
@@ -52,12 +53,12 @@ namespace Signaturit_Lobby_Wars.UnitTesting
             {
                 Signatures = { SignatureRole.N, SignatureRole.K, SignatureRole.V }
             };
-            Lawsuits lawsuit = new Lawsuits();
+            ILawsuits lawsuit = new Lawsuits();
 
             Action act = () => lawsuit.GetWinner(contractA, contractB);
             Exception exception = Assert.Throws<Exception>(act);
 
-            Assert.Equal("There is no contract winner. Signatures points of both contract are equals", exception.Message);
+            Assert.Equal(Utils.ExceptionMessages.SAME_POINTS, exception.Message);
         }
 
         [Fact]
@@ -65,14 +66,14 @@ namespace Signaturit_Lobby_Wars.UnitTesting
         {
             Contract contractA = new Contract()
             {
-                Signatures = { SignatureRole.N, SignatureRole.NONE, SignatureRole.V }
+                Signatures = { SignatureRole.K, SignatureRole.NONE, SignatureRole.N }
             };
             Contract contractB = new Contract()
             {
-                Signatures = { SignatureRole.N, SignatureRole.V, SignatureRole.V }
+                Signatures = { SignatureRole.K, SignatureRole.N }
             };
 
-            Lawsuits lawsuit = new Lawsuits();
+            ILawsuits lawsuit = new Lawsuits();
             SignatureRole result = lawsuit.GetMinimunSignatureToWin(contractA, contractB);
             SignatureRole mininumExpectedSignature = SignatureRole.N;
 
@@ -91,7 +92,7 @@ namespace Signaturit_Lobby_Wars.UnitTesting
                 Signatures = { SignatureRole.N, SignatureRole.V, SignatureRole.V }
             };
 
-            Lawsuits lawsuit = new Lawsuits();
+            ILawsuits lawsuit = new Lawsuits();
 
             Action act = () => lawsuit.GetMinimunSignatureToWin(contractA, contractB);
             Exception exception = Assert.Throws<Exception>(act);
@@ -111,7 +112,7 @@ namespace Signaturit_Lobby_Wars.UnitTesting
                 Signatures = { SignatureRole.K, SignatureRole.NONE, SignatureRole.V }
             };
 
-            Lawsuits lawsuit = new Lawsuits();
+            ILawsuits lawsuit = new Lawsuits();
 
             Action act = () => lawsuit.GetMinimunSignatureToWin(contractA, contractB);
             Exception exception = Assert.Throws<Exception>(act);
@@ -131,7 +132,7 @@ namespace Signaturit_Lobby_Wars.UnitTesting
                 Signatures = { SignatureRole.K, SignatureRole.V, SignatureRole.V }
             };
 
-            Lawsuits lawsuit = new Lawsuits();
+            ILawsuits lawsuit = new Lawsuits();
 
             Action act = () => lawsuit.GetMinimunSignatureToWin(contractA, contractB);
             Exception exception = Assert.Throws<Exception>(act);
